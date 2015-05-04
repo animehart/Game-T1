@@ -35,8 +35,8 @@ public class SmartEnemy extends GameObject{
 		float diffX = x - player.getX() - 8;
 		float diffY = y - player.getY() - 8;
 		float distance = (float) Math.sqrt((x-player.getX())*(x-player.getX()) + (y-player.getY())*(y-player.getY()));
-		velX = ((-1/distance)*diffX);
-		velY = ((-1/distance)*diffY);
+		velX = ((-2/distance)*diffX);
+		velY = ((-2/distance)*diffY);
 		
 	//	if(y <= 0 || y >= Game.HEIGHT-32) velY *= -1; // if it hits the top, multiply the velocity with -1 to reverse its direction
 	//	if(x <= 0 || x >= Game.WIDTH-16) velX *= -1; //if it hits the side, multiply the velocity with -1 to reverse its direction

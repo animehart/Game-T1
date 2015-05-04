@@ -42,7 +42,12 @@ public class Player extends GameObject {
 					HUD.HEALTH-=2;
 				}
 			}
+			else if(tempObject.getID() == ID.EnemyBoss){
+				if(getBounds().intersects(tempObject.getBounds())){ //if player touches enemy then decrease the player hp
+					HUD.HEALTH-=100;
 			}
+			}
+		}
 		}
 	
 	public void render(Graphics g){

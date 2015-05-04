@@ -21,11 +21,18 @@ public class Spawn {
 			
 			if(hud.getLevel() == 2){ //commenting this if statement will cause the program to spawn enemy everytime we hit 500
 				handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH)-50,r.nextInt(Game.HEIGHT)-50, ID.BasicEnemy, handler)); //if player reach level 2, spawn enemy
+				handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH)-50,r.nextInt(Game.HEIGHT)-50, ID.BasicEnemy, handler));
 			}
 			else if(hud.getLevel() == 3){
 				handler.addObject(new FastEnemy(r.nextInt(Game.WIDTH)-50,r.nextInt(Game.HEIGHT)-50, ID.FastEnemy, handler));
 			}
 			else if(hud.getLevel() == 4){
+				handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH)-50,r.nextInt(Game.HEIGHT)-50, ID.SmartEnemy, handler));
+			}
+			else if(hud.getLevel() == 5){
+				handler.clearEnemies();
+				handler.addObject(new EnemyBoss((Game.WIDTH/2)-48,-120,ID.EnemyBoss,handler));
+				handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH)-50,r.nextInt(Game.HEIGHT)-50, ID.SmartEnemy, handler));
 				handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH)-50,r.nextInt(Game.HEIGHT)-50, ID.SmartEnemy, handler));
 			}
 		}
