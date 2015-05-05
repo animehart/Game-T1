@@ -21,20 +21,24 @@ public class Game extends Canvas implements Runnable{
 	private Menu menu;
 	
 		
-	public STATE gameState = STATE.Menu;
+	public static STATE gameState = STATE.Menu;
 	
 	public Game(){
 		handler = new Handler();
-		menu = new Menu(this, handler, gameState);
+		hud = new HUD();
+		menu = new Menu(this, handler, gameState, hud);
 		this.addKeyListener(new KeyInput(handler));
 		this.addMouseListener(menu);
 		new Window(WIDTH, HEIGHT, "Game Beta", this);
-		hud = new HUD();
 		spawner = new Spawn(handler, hud);
 		r = new Random();
 		if(gameState == STATE.Game){
 			handler.addObject(new Player(WIDTH/2-32,HEIGHT/2-32, ID.Player, handler)); //spawns player in the middle
 			handler.addObject(new BasicEnemy(r.nextInt(WIDTH),r.nextInt(HEIGHT), ID.BasicEnemy, handler)); //spawn enemy	
+		}else{
+			for(int i=0;i<10;i++){
+				handler.addObject(new MenuParticle(r.nextInt(WIDTH),r.nextInt(HEIGHT), ID.MenuParticle, handler));
+			}
 		}
 	}
 	
@@ -86,8 +90,14 @@ public class Game extends Canvas implements Runnable{
 		if(gameState == STATE.Game){
 			hud.tick();
 			spawner.tick();
+			
+			if(HUD.HEALTH <= 0){
+				HUD.HEALTH = 100;
+				gameState = STATE.End;
+				handler.clearEnemies();
+			}
 		}
-		else if (gameState == STATE.Menu){
+		else if (gameState == STATE.Menu ||gameState == STATE.End){
 			menu.tick();
 		}
 	}
@@ -107,7 +117,7 @@ public class Game extends Canvas implements Runnable{
 		if(gameState == STATE.Game){ //check the state of the program
 			hud.render(g);
 		}
-		else if(gameState == STATE.Menu|| gameState == STATE.Help){ //check the state of the program
+		else if(gameState == STATE.Menu|| gameState == STATE.Help||gameState == STATE.End){ //check the state of the program
 			menu.render(g);
 		}
 		g.dispose();

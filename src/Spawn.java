@@ -6,13 +6,15 @@ public class Spawn {
 	private HUD hud;
 	private Random r = new Random();
 	
-	private int scoreKeep = 0;
+	public int scoreKeep = 0;
 	
 	public Spawn(Handler handler, HUD hud){
 		this.handler = handler;
 		this.hud  =  hud;
 	}
-	
+	public int setscoreK(int score){
+		return this.scoreKeep;
+	}
 	public void tick(){
 		scoreKeep++;
 		if(scoreKeep==500){ //if the score reached certain value, increase the level
@@ -34,6 +36,12 @@ public class Spawn {
 				handler.addObject(new EnemyBoss((Game.WIDTH/2)-48,-120,ID.EnemyBoss,handler));
 				handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH)-50,r.nextInt(Game.HEIGHT)-50, ID.SmartEnemy, handler));
 				handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH)-50,r.nextInt(Game.HEIGHT)-50, ID.SmartEnemy, handler));
+			}
+			else if(hud.getLevel() == 8){
+				handler.clearEnemies();
+				handler.addObject(new FastEnemy(r.nextInt(Game.WIDTH)-50,r.nextInt(Game.HEIGHT)-50, ID.FastEnemy, handler));
+				handler.addObject(new FastEnemy(r.nextInt(Game.WIDTH)-50,r.nextInt(Game.HEIGHT)-50, ID.FastEnemy, handler));
+				handler.addObject(new FastEnemy(r.nextInt(Game.WIDTH)-50,r.nextInt(Game.HEIGHT)-50, ID.FastEnemy, handler));
 			}
 		}
 	}

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 public class Handler {
 
+	STATE state;
 	LinkedList<GameObject>object = new LinkedList<GameObject>();
 	
 	public void tick(){
@@ -30,8 +31,10 @@ public class Handler {
 			GameObject tempObject = object.get(i);
 			if(tempObject.getID() == ID.Player){
 				object.clear();//clear all object in the screen
+				if(Game.gameState != STATE.End)
 				addObject(new Player((int)tempObject.getX(),(int)tempObject.getY(),ID.Player,this));
-			}
+			
 		}
 	}
+}
 }
