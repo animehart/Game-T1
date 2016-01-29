@@ -35,7 +35,7 @@ public class Game extends Canvas implements Runnable{
 		if(gameState == STATE.Game){
 			handler.addObject(new Player(WIDTH/2-32,HEIGHT/2-32, ID.Player, handler)); //spawns player in the middle
 			handler.addObject(new BasicEnemy(r.nextInt(WIDTH),r.nextInt(HEIGHT), ID.BasicEnemy, handler)); //spawn enemy	
-		}else{
+		}else if(gameState == STATE.Menu){
 			for(int i=0;i<10;i++){
 				handler.addObject(new MenuParticle(r.nextInt(WIDTH),r.nextInt(HEIGHT), ID.MenuParticle, handler));
 			}

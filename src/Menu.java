@@ -49,6 +49,9 @@ public class Menu extends MouseAdapter{
 		if(game.gameState == STATE.End){
 			if(mouseOver(mx,my,215,350,200,64)){
 				game.gameState = STATE.Menu;
+				for(int i=0;i<10;i++){
+					handler.addObject(new MenuParticle(r.nextInt(640),r.nextInt(640/108), ID.MenuParticle, handler));
+				}
 				return;
 			}
 		}
